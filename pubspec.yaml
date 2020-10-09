@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   syncfusion_flutter_gauges: ^18.3.38
   dio:
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
