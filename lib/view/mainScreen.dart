@@ -28,23 +28,23 @@ class _mainScreenState extends State<mainScreen> {
                 voltage /= 10;
                 return Stack(
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Card(
-                          child: ListTile(
-                            title: Text(snapshot.data['created_at']),
-                            subtitle: Text(snapshot.data['created_at']),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     Card(
+                    //       child: ListTile(
+                    //         title: Text(snapshot.data['created_at']),
+                    //         subtitle: Text(snapshot.data['created_at']),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     Center(
                         child: SfRadialGauge(
                       axes: <RadialAxis>[
                         RadialAxis(
                             startAngle: 180,
-                            endAngle: 90,
+                            endAngle: 0,
                             annotations: <GaugeAnnotation>[
                               GaugeAnnotation(
                                   axisValue: 50,
@@ -85,6 +85,23 @@ class _mainScreenState extends State<mainScreen> {
               }
             } // builder should also handle the case when data is not fetched yet
             ),
+             bottomNavigationBar: BottomNavigationBar(
+                currentIndex: 0, // this will be set when a new tab is tapped
+                items: [
+                  BottomNavigationBarItem(
+                    icon: new Icon(Icons.home),
+                    title: new Text('Home'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: new Icon(Icons.settings),
+                    title: new Text('Setting'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    title: Text('Profile')
+                  )
+                ],
+              )
       ),
     );
   }
