@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hinergi_kwh/view/historyView.dart';
 import 'package:hinergi_kwh/view/settingScreen.dart';
 import 'homeScreen.dart';
+import 'settingScreen.dart';
 
 class mainScreen extends StatefulWidget {
   @override
