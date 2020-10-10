@@ -26,6 +26,7 @@ dependencies:
   syncfusion_flutter_gauges: ^18.3.38
   dio:
   intl: ^0.16.1
+  loading: ^1.0.2
 
 dev_dependencies:
   flutter_test:

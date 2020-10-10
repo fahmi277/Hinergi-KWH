@@ -49,15 +49,16 @@ Future<Map> getThinkspeakData() async {
 
     // String url = baseUrl + channelId + feedUrl + apiKey + timezoneUrl;
     String url =
-        "https://api.thingspeak.com/channels/1154780/fields/4?api_key=SPZVVOM0D4YO6TX0&timezone=Asia%2FJakarta";
+        "https://api.thingspeak.com/channels/1154780/feeds.json?api_key=SPZVVOM0D4YO6TX0&timezone=Asia%2FJakarta";
+    // "https://api.thingspeak.com/channels/1154780/fields/4?api_key=SPZVVOM0D4YO6TX0&timezone=Asia%2FJakarta";
+    // String url = "https://api.thingspeak.com/channels/1154780/fields/4?end=2020-10-11%2000:00:00&apikey=SPZVVOM0D4YO6TX0&start=2020-10-10%2000:00:00";
     Response response = await dio.get(url);
-    Map valueMap = json.decode(response.data);
+    print(response.data.runtimeType);
+    // Map valueMap = json.decode(response.data);
 
     // List valueList = valueMap["feeds"];
 
-    // print(valueList.length);
-
-    return valueMap;
+    return response.data;
   } catch (e) {
     return null;
   }

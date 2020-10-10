@@ -1,5 +1,9 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:hinergi_kwh/service/apiService.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
+import 'package:loading/loading.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:intl/intl.dart';
 
@@ -8,8 +12,10 @@ class mainScreen extends StatefulWidget {
   _mainScreenState createState() => _mainScreenState();
 }
 
-double maxKwh = 10; // budget satuan budget kwh
-double limitKwh = 7; //limit warning kwh
+double maxKwh = 3; // budget satuan budget kwh
+double limitKwh = 3 * 0.7; //limit warning kwh
+
+Color _colorGauge = Colors.green;
 
 class _mainScreenState extends State<mainScreen> {
   @override
@@ -30,6 +36,10 @@ class _mainScreenState extends State<mainScreen> {
                   double startKwhToday = double.parse(dataMasuk[0]["field4"]);
                   double lastKwhToday = double.parse(
                       dataMasuk[lengthDataToday.length - 1]["field4"]);
+
+                  if (startKwhToday > lastKwhToday) {
+                    startKwhToday = 0;
+                  }
                   double kwhNow = lastKwhToday - startKwhToday;
 
                   String tempTimeStartToday = dataMasuk[0]["created_at"]
@@ -48,6 +58,14 @@ class _mainScreenState extends State<mainScreen> {
                   DateTime timeLastToday = new DateFormat("yyyy-MM-dd hh:mm:ss")
                       .parse(tempTimeLastToday);
 
+                  // change color
+                  double warning = limitKwh * 0.5;
+                  if (kwhNow >= warning) {
+                    _colorGauge = Colors.red;
+                  } else {
+                    _colorGauge = Colors.green;
+                  }
+
                   return Stack(
                     children: [
                       Card(
@@ -56,11 +74,11 @@ class _mainScreenState extends State<mainScreen> {
                           title: Text("Start : " +
                               timeStartToday.toString().split(".")[0] +
                               " KWH : " +
-                              startKwhToday.toString()),
+                              startKwhToday.toStringAsFixed(1)),
                           subtitle: Text("Last : " +
                               timeLastToday.toString().split(".")[0] +
                               " KWH : " +
-                              lastKwhToday.toString()),
+                              lastKwhToday.toStringAsFixed(1)),
                           // subtitle: Text(snapshot.data['created_at']),
                         ),
                       ),
@@ -84,7 +102,7 @@ class _mainScreenState extends State<mainScreen> {
                                     axisValue: 50,
                                     positionFactor: 0.1,
                                     widget: Text(
-                                      kwhNow.toString() + " KWH",
+                                      kwhNow.toStringAsFixed(2) + " KWH",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
@@ -100,7 +118,7 @@ class _mainScreenState extends State<mainScreen> {
                                     value: kwhNow,
                                     // double.parse(
                                     //     (energy.toStringAsFixed(0))),
-                                    color: Colors.green,
+                                    color: _colorGauge,
                                     dashArray: <double>[8, 2])
                               ])
                         ],
@@ -112,9 +130,14 @@ class _mainScreenState extends State<mainScreen> {
                   //   style: TextStyle(color: Colors.green),
                   // );
                 } else {
-                  return Text(
-                    "Data : NULL",
-                    style: TextStyle(color: Colors.red),
+                  return Container(
+                    // color: Colors.lightBlue,
+                    child: Center(
+                      child: Loading(
+                          indicator: BallPulseIndicator(),
+                          size: 100.0,
+                          color: Colors.lightBlue),
+                    ),
                   );
                 }
               }
