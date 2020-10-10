@@ -8,8 +8,6 @@ class mainScreen extends StatefulWidget {
   _mainScreenState createState() => _mainScreenState();
 }
 
-
-
 class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
