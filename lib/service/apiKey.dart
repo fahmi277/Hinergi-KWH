@@ -3,6 +3,10 @@ class dataApi {
   String channelID = "1154780";
 }
 
+class dataVariable {
+  double kwhPrice = 930;
+}
+
 /*
 
 api harian
