@@ -74,11 +74,11 @@ class _mainScreenState extends State<mainScreen> {
                           title: Text("Start : " +
                               timeStartToday.toString().split(".")[0] +
                               " KWH : " +
-                              startKwhToday.toStringAsFixed(1)),
+                              startKwhToday.toStringAsFixed(2)),
                           subtitle: Text("Last : " +
                               timeLastToday.toString().split(".")[0] +
                               " KWH : " +
-                              lastKwhToday.toStringAsFixed(1)),
+                              lastKwhToday.toStringAsFixed(2)),
                           // subtitle: Text(snapshot.data['created_at']),
                         ),
                       ),
