@@ -27,6 +27,8 @@ dependencies:
   dio:
   intl: ^0.16.1
   loading: ^1.0.2
+  validators: ^2.0.0+1
+  shared_preferences: ^0.5.1+2
 
 dev_dependencies:
   flutter_test:

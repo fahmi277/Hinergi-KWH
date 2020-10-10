@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'homeScreen.dart';
+import 'settingScreen.dart';
 
 class mainScreen extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class mainScreen extends StatefulWidget {
 class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    homeScreen(),homeScreen(),homeScreen()
+    homeScreen(),settingScreen(),homeScreen()
   ];
 
   @override
