@@ -7,9 +7,11 @@ Widget buildCalender() {
         child: SfCalendar(
       view: CalendarView.month,
       dataSource: MeetingDataSource(_getDataSource()),
+      initialSelectedDate: DateTime(2020, 10, 11),
       monthViewSettings: MonthViewSettings(
-          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-          showAgenda: true),
+        appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+        showAgenda: true,
+      ),
     )),
   );
 }
@@ -18,10 +20,11 @@ List<Meeting> _getDataSource() {
   var meetings = <Meeting>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 0, 0, 0);
-  final DateTime endTime = DateTime.now();
-  meetings.add(
-      Meeting('1KWH 1200', startTime, endTime, const Color(0xFF0F8644), false));
+      DateTime(today.year, today.month, today.day);
+  final DateTime endTime =
+      DateTime(today.year, today.month, today.day, 23, 59, 0);
+  meetings
+      .add(Meeting('1KWH', startTime, endTime, const Color(0xFF0F8644), false));
   return meetings;
 }
 

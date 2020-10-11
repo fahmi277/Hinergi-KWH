@@ -70,30 +70,6 @@ class homeScreen extends StatelessWidget {
 
             return Stack(
               children: [
-                Card(
-                  // child: Text(snapshot.data['created_at']),
-                  child: ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Start : " +
-                            timeStartToday.toString().split(".")[0] +
-                            " KWH : " +
-                            startKwhToday.toStringAsFixed(3)),
-                      ],
-                    ),
-                    subtitle: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Last : " +
-                            timeLastToday.toString().split(".")[0] +
-                            " KWH : " +
-                            lastKwhToday.toStringAsFixed(3)),
-                      ],
-                    ),
-                    // subtitle: Text(snapshot.data['created_at']),
-                  ),
-                ),
                 // Card(
                 //   child: Text(snapshot.data['created_at']),
                 //   // child: ListTile(

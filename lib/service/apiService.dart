@@ -66,6 +66,7 @@ Future<Map> getThinkspeakData() async {
 
     return response.data;
   } catch (e) {
+    print("null");
     return null;
   }
 }
