@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:hinergi_kwh/controller/getTimeData.dart';
 import 'package:hinergi_kwh/service/apiKey.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //https://api.thingspeak.com/channels/1154780/feeds/last.json?api_key=SPZVVOM0D4YO6TX0&timezone=Asia%2FJakarta
 
@@ -38,8 +40,12 @@ import 'package:hinergi_kwh/service/apiKey.dart';
 // }
 
 Future<Map> getThinkspeakData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   try {
     var dio = Dio();
+
+    String channelId = prefs.getString('channelId');
+    String apiKey = prefs.getString('apiKey');
 
     // String channelId = dataApi().channelID;
     // String apiKey = dataApi().apiKey;
@@ -48,18 +54,24 @@ Future<Map> getThinkspeakData() async {
     // String timezoneUrl = "&timezone=Asia%2FJakarta";
 
     // String url = baseUrl + channelId + feedUrl + apiKey + timezoneUrl;
-    String url =
-        "https://api.thingspeak.com/channels/1154780/feeds.json?api_key=SPZVVOM0D4YO6TX0&timezone=Asia%2FJakarta";
-    // "https://api.thingspeak.com/channels/1154780/fields/4?api_key=SPZVVOM0D4YO6TX0&timezone=Asia%2FJakarta";
-    // String url = "https://api.thingspeak.com/channels/1154780/fields/4?end=2020-10-11%2000:00:00&apikey=SPZVVOM0D4YO6TX0&start=2020-10-10%2000:00:00";
+
+    // print(GetTimedata().timeData["startTime"]);
+    // print(GetTimedata().timeData["endTime"]);
+
+    String url = "https://api.thingspeak.com/channels/1154780/feeds.json?end=" +
+        GetTimedata().timeData["endTime"] +
+        "&apikey=SPZVVOM0D4YO6TX0&start=" +
+        GetTimedata().timeData["startTime"] +
+        "&timezone=Asia%2FJakarta";
     Response response = await dio.get(url);
-    print(response.data.runtimeType);
+    // print(response.data);
     // Map valueMap = json.decode(response.data);
 
     // List valueList = valueMap["feeds"];
 
     return response.data;
   } catch (e) {
+    print("null");
     return null;
   }
 }

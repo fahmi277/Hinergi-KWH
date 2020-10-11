@@ -1,8 +1,11 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:hinergi_kwh/view/historyView.dart';
+import 'package:hinergi_kwh/view/settingScreen.dart';
 import 'homeScreen.dart';
 import 'settingScreen.dart';
+import 'package:hinergi_kwh/model/setting.dart';
 
 class mainScreen extends StatefulWidget {
   @override
@@ -11,9 +14,10 @@ class mainScreen extends StatefulWidget {
 
 class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    homeScreen(),settingScreen(),homeScreen()
-  ];
+  final List<Widget> _children = [homeScreen(), settingScreen(), buildCalender()];
+
+   Setting setting = Setting();
+   
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +47,11 @@ class _mainScreenState extends State<mainScreen> {
           )),
     );
   }
+
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
+      print(_currentIndex);
     });
   }
 }
-
