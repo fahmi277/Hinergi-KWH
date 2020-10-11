@@ -44,8 +44,8 @@ Future<Map> getThinkspeakData() async {
   try {
     var dio = Dio();
 
-    String channelId = prefs.getString('channelId');
-    String apiKey = prefs.getString('apiKey');
+    String channelId = prefs.getString('channelId') ?? '1154780';
+    String apiKey = prefs.getString('apiKey') ?? 'SPZVVOM0D4YO6TX0';
 
     // String channelId = dataApi().channelID;
     // String apiKey = dataApi().apiKey;
@@ -57,10 +57,12 @@ Future<Map> getThinkspeakData() async {
 
     // print(GetTimedata().timeData["startTime"]);
     // print(GetTimedata().timeData["endTime"]);
+    // channel id = 1154780
+    // api key = SPZVVOM0D4YO6TX0
 
-    String url = "https://api.thingspeak.com/channels/1154780/feeds.json?end=" +
+    String url = "https://api.thingspeak.com/channels/"+channelId+"/feeds.json?end=" +
         GetTimedata().timeData["endTime"] +
-        "&apikey=SPZVVOM0D4YO6TX0&start=" +
+        "&apikey="+apiKey+"&start=" +
         GetTimedata().timeData["startTime"] +
         "&timezone=Asia%2FJakarta";
     Response response = await dio.get(url);

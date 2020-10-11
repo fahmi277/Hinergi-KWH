@@ -15,10 +15,7 @@ class mainScreen extends StatefulWidget {
 class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [homeScreen(), settingScreen(), buildCalender()];
-
-   Setting setting = Setting();
    
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,7 +39,8 @@ class _mainScreenState extends State<mainScreen> {
                 label: 'Setting',
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: 'Profile')
+                icon: Icon(Icons.calendar_today_sharp), 
+                label: 'Calendar')
             ],
           )),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class MyTextFormField extends StatelessWidget {
   final String hintText;
   final String labelText;
+  final String helpText;
   final String value;
   final Function validator;
   final Function onSaved;
@@ -14,6 +15,7 @@ class MyTextFormField extends StatelessWidget {
 MyTextFormField({
     this.hintText,
     this.labelText,
+    this.helpText,
     this.value = '',
     this.validator,
     this.onSaved,
@@ -34,6 +36,7 @@ MyTextFormField({
           icon: icon,
           hintText: hintText,
           labelText: labelText,
+          helperText: helpText,
           contentPadding: EdgeInsets.all(15.0),
           border: InputBorder.none,
           filled: true,

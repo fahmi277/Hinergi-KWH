@@ -68,13 +68,13 @@ class settingScreen extends StatelessWidget {
                                     isEmail: false,
                                     icon: Icon(Icons.money),
                                     validator: (String value) {
-                                      if (!validator.isNumeric(value)) {
+                                      if (!validator.isFloat(value)) {
                                         return 'Please enter a valid number';
                                       }
                                       return null;
                                     },
                                     onSaved: (String value) {
-                                      setting.tarifPerKwh = int.parse(value);
+                                      setting.tarifPerKwh = double.parse(value);
                                     },
                                   ),
                                   MyTextFormField(
@@ -84,13 +84,29 @@ class settingScreen extends StatelessWidget {
                                     isEmail: false,
                                     icon: Icon(Icons.money_off_rounded),
                                     validator: (String value) {
-                                      if (!validator.isNumeric(value)) {
+                                      if (!validator.isFloat(value)) {
                                         return 'Please enter a valid number';
                                       }
                                       return null;
                                     },
                                     onSaved: (String value) {
-                                      setting.budgetMax = int.parse(value);
+                                      setting.budgetMax = double.parse(value);
+                                    },
+                                  ),
+                                  MyTextFormField(
+                                    hintText: 'Masukkan batas watt meter',
+                                    labelText: 'Batas daya',
+                                    value: snapshot.data.kwhMax.toString(),
+                                    isEmail: false,
+                                    icon: Icon(Icons.lightbulb_outline_sharp),
+                                    validator: (String value) {
+                                      if (!validator.isFloat(value)) {
+                                        return 'Please enter a valid number';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (String value) {
+                                      setting.kwhMax = double.parse(value);
                                     },
                                   ),
                                   Container(
@@ -176,7 +192,7 @@ class settingScreen extends StatelessWidget {
                                       return null;
                                     },
                                     onSaved: (String value) {
-                                      setting.tarifPerKwh = int.parse(value);
+                                      setting.tarifPerKwh = double.parse(value);
                                     },
                                   ),
                                   MyTextFormField(
@@ -191,7 +207,22 @@ class settingScreen extends StatelessWidget {
                                       return null;
                                     },
                                     onSaved: (String value) {
-                                      setting.budgetMax = int.parse(value);
+                                      setting.budgetMax = double.parse(value);
+                                    },
+                                  ),
+                                  MyTextFormField(
+                                    hintText: 'Masukkan batas watt meter',
+                                    labelText: 'Batas daya',
+                                    isEmail: false,
+                                    icon: Icon(Icons.lightbulb_outline_sharp),
+                                    validator: (String value) {
+                                      if (!validator.isFloat(value)) {
+                                        return 'Please enter a valid number';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (String value) {
+                                      setting.kwhMax = double.parse(value);
                                     },
                                   ),
                                   Container(

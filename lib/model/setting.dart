@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting {
-  int budgetMax = 0;
-  int tarifPerKwh = 0;
+  double budgetMax = 0;
+  double kwhMax = 0;
+  double tarifPerKwh = 0;
   String channelId;
   String apiKey;
 
-  Setting({this.channelId,this.apiKey,this.tarifPerKwh,this.budgetMax});
+  Setting({this.channelId,this.apiKey,this.tarifPerKwh,this.budgetMax,this.kwhMax});
 
   setSetting(Setting set) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('channelId', set.channelId);
     prefs.setString('apiKey', set.apiKey);
-    prefs.setInt('tarif', set.tarifPerKwh);
-    prefs.setInt('butget', set.budgetMax);
+    prefs.setDouble('tarif', set.tarifPerKwh);
+    prefs.setDouble('budget', set.budgetMax);
+    prefs.setDouble('kwhmax', set.kwhMax);
   }
 
   setChannelId(String data) async {
@@ -27,14 +29,14 @@ class Setting {
     prefs.setString('apiKey', data);
   }
 
-  setTarif(int data) async {
+  setTarif(double data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('tarif', data);
+    prefs.setDouble('tarif', data);
   }
 
-  setButget(int data) async {
+  setButget(double data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('butget', data);
+    prefs.setDouble('butget', data);
   }
 
   Future<Setting> getSetting() async{
@@ -44,8 +46,9 @@ class Setting {
 
       set.channelId = prefs.getString('channelId') ?? 0;
       set.apiKey = prefs.getString('apiKey') ?? 0;
-      set.tarifPerKwh = prefs.getInt('tarif') ?? 0;
-      set.budgetMax = prefs.getInt('budget') ?? 0;
+      set.tarifPerKwh = prefs.getDouble('tarif') ?? 0;
+      set.budgetMax = prefs.getDouble('budget') ?? 0;
+      set.kwhMax = prefs.getDouble('kwhmax') ?? 0;
       return set;
     } catch(e){
       Setting set = Setting();
@@ -53,7 +56,8 @@ class Setting {
       set.channelId = 'non set';
       set.tarifPerKwh = 0;
       set.budgetMax = 0;
-      return set;
+      set.kwhMax = 0;
+      return e;
     }
    
   }
