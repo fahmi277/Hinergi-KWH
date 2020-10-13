@@ -8,7 +8,12 @@ class Setting {
   String channelId;
   String apiKey;
 
-  Setting({this.channelId,this.apiKey,this.tarifPerKwh,this.budgetMax,this.kwhMax});
+  Setting(
+      {this.channelId,
+      this.apiKey,
+      this.tarifPerKwh,
+      this.budgetMax,
+      this.kwhMax});
 
   setSetting(Setting set) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -39,8 +44,8 @@ class Setting {
     prefs.setDouble('butget', data);
   }
 
-  Future<Setting> getSetting() async{
-    try{
+  Future<Setting> getSetting() async {
+    try {
       Setting set = Setting();
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -50,15 +55,14 @@ class Setting {
       set.budgetMax = prefs.getDouble('budget') ?? 0;
       set.kwhMax = prefs.getDouble('kwhmax') ?? 0;
       return set;
-    } catch(e){
+    } catch (e) {
       Setting set = Setting();
       set.apiKey = 'non set';
       set.channelId = 'non set';
       set.tarifPerKwh = 0;
       set.budgetMax = 0;
       set.kwhMax = 0;
-      return e;
+      return set;
     }
-   
   }
 }

@@ -60,9 +60,13 @@ Future<Map> getThinkspeakData() async {
     // channel id = 1154780
     // api key = SPZVVOM0D4YO6TX0
 
-    String url = "https://api.thingspeak.com/channels/"+channelId+"/feeds.json?end=" +
+    String url = "https://api.thingspeak.com/channels/" +
+        channelId +
+        "/feeds.json?end=" +
         GetTimedata().timeData["endTime"] +
-        "&apikey="+apiKey+"&start=" +
+        "&apikey=" +
+        apiKey +
+        "&start=" +
         GetTimedata().timeData["startTime"] +
         "&timezone=Asia%2FJakarta";
     Response response = await dio.get(url);

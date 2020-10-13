@@ -1,26 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-Widget buildCalender() {
+class BuildCalenderView extends StatefulWidget {
+  @override
+  _BuildCalenderViewState createState() => _BuildCalenderViewState();
+}
+
+class _BuildCalenderViewState extends State<BuildCalenderView> {
+  @override
+  Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(750, 1334), allowFontScaling: false);
+    return buildCalender(context);
+  }
+}
+
+Widget buildCalender(BuildContext context) {
   return Scaffold(
-    body: Container(
-        child: SfCalendar(
-      view: CalendarView.month,
-      dataSource: MeetingDataSource(_getDataSource()),
-      initialSelectedDate: DateTime(2020, 10, 11),
-      monthViewSettings: MonthViewSettings(
-        appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-        showAgenda: true,
-      ),
-    )),
+    body: Stack(
+      children: [
+        showData(),
+        Container(
+            height: ScreenUtil().setHeight(600),
+            child: SfCalendar(
+              onTap: (CalendarTapDetails details) {
+                print(details.date);
+              },
+              view: CalendarView.month,
+              // dataSource: MeetingDataSource(_getDataSource()),
+              initialSelectedDate: DateTime.now(),
+              showNavigationArrow: true,
+              monthViewSettings: MonthViewSettings(
+                // numberOfWeeksInView: 2,
+                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+                // showAgenda: true,
+              ),
+            )),
+      ],
+    ),
   );
 }
+
+Widget showData() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [Text("data")],
+  );
+}
+
+// =============== add meeting are, irrelevant with this project =================//
 
 List<Meeting> _getDataSource() {
   var meetings = <Meeting>[];
   final DateTime today = DateTime.now();
-  final DateTime startTime =
-      DateTime(today.year, today.month, today.day);
+  final DateTime startTime = DateTime(today.year, today.month, today.day);
   final DateTime endTime =
       DateTime(today.year, today.month, today.day, 23, 59, 0);
   meetings
@@ -68,3 +103,5 @@ class Meeting {
   Color background;
   bool isAllDay;
 }
+
+// =============== add meeting are, irrelevant with this project =================//
