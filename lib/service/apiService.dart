@@ -39,13 +39,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 //   }
 // }
 
-Future<Map> getThinkspeakData() async {
+Future<Map> getThinkspeakData(Map timeValue) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   try {
     var dio = Dio();
 
     String channelId = prefs.getString('channelId') ?? '1154780';
     String apiKey = prefs.getString('apiKey') ?? 'SPZVVOM0D4YO6TX0';
+
+    String startTime = timeValue["startTime"];
+    String endTime = timeValue["endTime"];
 
     // String channelId = dataApi().channelID;
     // String apiKey = dataApi().apiKey;
@@ -60,15 +63,26 @@ Future<Map> getThinkspeakData() async {
     // channel id = 1154780
     // api key = SPZVVOM0D4YO6TX0
 
+    // String url = "https://api.thingspeak.com/channels/" +
+    //     channelId +
+    //     "/feeds.json?end=" +
+    //     GetTimedata().timeData["endTime"] +
+    //     "&apikey=" +
+    //     apiKey +
+    //     "&start=" +
+    //     GetTimedata().timeData["startTime"] +
+    //     "&timezone=Asia%2FJakarta";
+
     String url = "https://api.thingspeak.com/channels/" +
         channelId +
         "/feeds.json?end=" +
-        GetTimedata().timeData["endTime"] +
+        endTime +
         "&apikey=" +
         apiKey +
         "&start=" +
-        GetTimedata().timeData["startTime"] +
+        startTime +
         "&timezone=Asia%2FJakarta";
+
     Response response = await dio.get(url);
     // print(response.data);
     // Map valueMap = json.decode(response.data);

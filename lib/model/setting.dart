@@ -22,6 +22,8 @@ class Setting {
     prefs.setDouble('tarif', set.tarifPerKwh);
     prefs.setDouble('budget', set.budgetMax);
     prefs.setDouble('kwhmax', set.kwhMax);
+    //start time
+    prefs.setString("startTime", "2020-10-10");
   }
 
   setChannelId(String data) async {

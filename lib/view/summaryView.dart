@@ -10,6 +10,28 @@ Widget textDisplay(String text) {
           color: Colors.black, fontSize: ScreenUtil().setSp(40)));
 }
 
+Widget todayView(String kwhNow) {
+  return Stack(
+    children: [
+      Padding(
+        padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(25)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                textDisplay("Penggunaan hari ini : " + kwhNow + " KWH")
+                // Text(dateUpdate),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 Widget summaryView(Map summaryData) {
   double voltage = double.parse(summaryData["field1"]);
   double current = double.parse(summaryData["field2"]);
@@ -23,21 +45,21 @@ Widget summaryView(Map summaryData) {
   double widthCard = 150;
   return Stack(
     children: [
-      Padding(
-        padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(30)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                textDisplay("Penggunaan hari ini ")
-                // Text(dateUpdate),
-              ],
-            ),
-          ],
-        ),
-      ),
+      // Padding(
+      //   padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(30)),
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.end,
+      //     children: [
+      //       Row(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           textDisplay("Penggunaan hari ini ")
+      //           // Text(dateUpdate),
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      // ),
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

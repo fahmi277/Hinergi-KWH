@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hinergi_kwh/controller/getTimeData.dart';
 import 'package:hinergi_kwh/controller/totalCost.dart';
 import 'package:hinergi_kwh/model/setting.dart';
 import 'package:hinergi_kwh/service/apiService.dart';
@@ -37,9 +38,13 @@ class homeScreen extends StatelessWidget {
             setting.tarifPerKwh = snapshot.data.tarifPerKwh;
             setting.budgetMax = snapshot.data.budgetMax;
             setting.kwhMax = snapshot.data.kwhMax;
+
+            // add range date selector //
+            Map timeValue = GetTimedata().timeValue(DateTime.now());
             return StreamBuilder(
                 stream: Stream.periodic(Duration(seconds: 5)).asyncMap((i) =>
-                    getThinkspeakData()), // i is null here (check periodic docs)
+                    getThinkspeakData(
+                        timeValue)), // i is null here (check periodic docs)
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     var dataMasuk = snapshot.data["feeds"];
@@ -48,6 +53,10 @@ class homeScreen extends StatelessWidget {
                     double startKwhToday = double.parse(dataMasuk[0]["field4"]);
                     double lastKwhToday = double.parse(
                         dataMasuk[lengthDataToday.length - 1]["field4"]);
+
+                    double realtimeKwh = double.parse(
+                        dataMasuk[lengthDataToday.length - 1]["field3"]);
+                    realtimeKwh /= 1000;
                     Map summaryData = dataMasuk[lengthDataToday.length - 1];
 
                     if (startKwhToday > lastKwhToday) {
@@ -73,14 +82,14 @@ class homeScreen extends StatelessWidget {
                             .parse(tempTimeLastToday);
 
                     // change color
-                    double warning = GetPrice().getKwhPerBudget(
-                            setting.budgetMax, setting.tarifPerKwh) *
-                        0.5;
-                    if (kwhNow >= warning) {
-                      _colorGauge = Colors.red;
-                    } else {
-                      _colorGauge = Colors.green;
-                    }
+                    // double warning = GetPrice().getKwhPerBudget(
+                    //         setting.budgetMax, setting.tarifPerKwh) *
+                    //     0.5;
+                    // if (kwhNow >= warning) {
+                    //   _colorGauge = Colors.red;
+                    // } else {
+                    //   _colorGauge = Colors.green;
+                    // }
 
                     return Stack(
                       children: [
@@ -92,81 +101,107 @@ class homeScreen extends StatelessWidget {
                         //   // ),
                         // ),
                         Center(
-                            child: SfRadialGauge(
-                          axes: <RadialAxis>[
-                            RadialAxis(
-                                minimum: 0,
-                                maximum: maxKwh,
-                                startAngle: 120,
-                                endAngle: -30,
-                                annotations: <GaugeAnnotation>[
-                                  GaugeAnnotation(
-                                      axisValue: 50,
-                                      positionFactor: 0.1,
-                                      widget: Center(
-                                        child: Container(
-                                          width: ScreenUtil().setWidth(300),
-                                          height: ScreenUtil().setHeight(400),
-                                          // color: Colors.blueGrey,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Center(
-                                                  child: Text(
-                                                      kwhNow
-                                                              .toStringAsFixed(
-                                                                  3) +
-                                                          " KWH",
-                                                      style:
-                                                          GoogleFonts.quantico(
-                                                              color: Colors
-                                                                  .blue,
-                                                              fontSize:
-                                                                  ScreenUtil()
-                                                                      .setSp(
-                                                                          42)))),
-                                              Center(
-                                                  child: Text(
-                                                      GetPrice().getPriceKwh(
-                                                          kwhNow,
-                                                          setting.tarifPerKwh),
-                                                      style:
-                                                          GoogleFonts.quantico(
-                                                              color: Colors
-                                                                  .blue,
-                                                              fontSize:
-                                                                  ScreenUtil()
-                                                                      .setSp(
-                                                                          42)))),
-                                            ],
+                            child: Container(
+                          width: ScreenUtil().setHeight(700),
+                          height: ScreenUtil().setHeight(700),
+                          child: SfRadialGauge(
+                            axes: <RadialAxis>[
+                              RadialAxis(
+                                  minimum: 0,
+                                  maximum: maxKwh,
+                                  startAngle: 120,
+                                  endAngle: -30,
+                                  annotations: <GaugeAnnotation>[
+                                    GaugeAnnotation(
+                                        axisValue: 50,
+                                        positionFactor: 0.1,
+                                        widget: Center(
+                                          child: Container(
+                                            width: ScreenUtil().setWidth(300),
+                                            height: ScreenUtil().setHeight(400),
+                                            // color: Colors.blueGrey,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                    child: Text(
+                                                        realtimeKwh
+                                                                .toStringAsFixed(
+                                                                    3) +
+                                                            " KWH",
+                                                        style: GoogleFonts
+                                                            .quantico(
+                                                                color:
+                                                                    Colors.blue,
+                                                                fontSize:
+                                                                    ScreenUtil()
+                                                                        .setSp(
+                                                                            42)))),
+                                                // Center(
+                                                //     child: Text(
+                                                //         GetPrice().getPriceKwh(
+                                                //             kwhNow,
+                                                //             setting
+                                                //                 .tarifPerKwh),
+                                                //         style: GoogleFonts
+                                                //             .quantico(
+                                                //                 color:
+                                                //                     Colors.blue,
+                                                //                 fontSize:
+                                                //                     ScreenUtil()
+                                                //                         .setSp(
+                                                //                             42)))),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                      // widget: Text(
-                                      //   kwhNow.toStringAsFixed(3) + " KWH",
-                                      //   style: TextStyle(
-                                      //       fontWeight: FontWeight.bold, fontSize: 20),
-                                      // )
+                                        )
+                                        // widget: Text(
+                                        //   kwhNow.toStringAsFixed(3) + " KWH",
+                                        //   style: TextStyle(
+                                        //       fontWeight: FontWeight.bold, fontSize: 20),
+                                        // )
 
-                                      )
-                                ],
-                                pointers: <GaugePointer>[
-                                  MarkerPointer(
-                                      value: limitKwh,
-                                      color: Colors.red,
-                                      markerType: MarkerType.text,
-                                      text: "BUDGET"),
-                                  RangePointer(
-                                      value: kwhNow,
-                                      width: 20,
-                                      // double.parse(
-                                      //     (energy.toStringAsFixed(0))),
-                                      color: _colorGauge,
-                                      dashArray: <double>[8, 2])
-                                ])
-                          ],
+                                        )
+                                  ],
+                                  pointers: <GaugePointer>[
+                                    MarkerPointer(
+                                        value: limitKwh,
+                                        color: Colors.red,
+                                        markerType: MarkerType.text,
+                                        text: "BUDGET"),
+                                    RangePointer(
+                                        value: kwhNow,
+                                        width: 20,
+                                        // double.parse(
+                                        //     (energy.toStringAsFixed(0))),
+                                        color: _colorGauge,
+                                        dashArray: <double>[8, 2])
+                                  ])
+                            ],
+                          ),
                         )),
+
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: ScreenUtil().setHeight(30)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  textDisplay("Penggunaan hari ini\n" +
+                                      kwhNow.toStringAsFixed(2) +
+                                      " KWH  " +
+                                      GetPrice().getPriceKwh(
+                                          kwhNow, setting.tarifPerKwh)),
+                                  // Text(dateUpdate),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
                         summaryView(summaryData),
                       ],
@@ -195,15 +230,15 @@ class homeScreen extends StatelessWidget {
                 );
           } else {
             return Text("data");
-            return Container(
-              // color: Colors.lightBlue,
-              child: Center(
-                child: Loading(
-                    indicator: BallPulseIndicator(),
-                    size: 100.0,
-                    color: Colors.lightBlue),
-              ),
-            );
+            // return Container(
+            //   // color: Colors.lightBlue,
+            //   child: Center(
+            //     child: Loading(
+            //         indicator: BallPulseIndicator(),
+            //         size: 100.0,
+            //         color: Colors.lightBlue),
+            //   ),
+            // );
           }
         });
   }
