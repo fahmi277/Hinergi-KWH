@@ -23,26 +23,6 @@ class BuildCalenderView extends StatefulWidget {
   _BuildCalenderViewState createState() => _BuildCalenderViewState();
 }
 
-void newMessage(int number, String message) {
-  final duration = Duration(seconds: number);
-  Timer.periodic(duration, (Timer t) => streamController.add(message));
-  // setState(() {});
-}
-
-String click() {
-  String data;
-  streamController.stream.listen((messages) {
-    print(messages);
-    if (messages.isEmpty) {
-      data = "fahmi";
-    } else {
-      data = messages;
-    }
-  });
-
-  return data;
-}
-
 class _BuildCalenderViewState extends State<BuildCalenderView> {
   @override
   void initState() {
