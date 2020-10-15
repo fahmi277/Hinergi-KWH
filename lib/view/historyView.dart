@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hinergi_kwh/controller/getTimeData.dart';
+import 'package:hinergi_kwh/model/setting.dart';
 import 'package:hinergi_kwh/service/apiService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,19 +25,6 @@ class BuildCalenderView extends StatefulWidget {
 }
 
 class _BuildCalenderViewState extends State<BuildCalenderView> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    // newMessage(1, 'You got a message!');
-  }
-
-  void dispose() {
-    streamController.close();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
@@ -69,12 +57,15 @@ Widget buildCalender(BuildContext context) {
                             double.parse(dataList[panjangData - 1]['field4']) -
                                 double.parse(dataList[0]['field4']);
 
+                        double abonemen = harian * 950;
+
                         return Text(
-                            "Penggunaan Tanggal " +
+                            "Penggunaan " +
                                 timeValue['startTime'].toString() +
                                 "\n" +
                                 harian.toStringAsFixed(2) +
-                                "KWH",
+                                "KWH " +
+                                abonemen.toStringAsFixed(0),
                             style: GoogleFonts.quantico(
                                 color: Colors.blue,
                                 fontSize: ScreenUtil().setSp(30)));

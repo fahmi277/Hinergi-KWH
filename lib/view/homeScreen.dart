@@ -93,13 +93,6 @@ class homeScreen extends StatelessWidget {
 
                     return Stack(
                       children: [
-                        // Card(
-                        //   child: Text(snapshot.data['created_at']),
-                        //   // child: ListTile(
-                        //   //   title: Text(snapshot.data['created_at']),
-                        //   //   // subtitle: Text(snapshot.data['created_at']),
-                        //   // ),
-                        // ),
                         Center(
                             child: Container(
                           width: ScreenUtil().setHeight(700),
