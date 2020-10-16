@@ -1,5 +1,5 @@
 class Daily {
-  int id;
+  String id;
   String name;
 
   Daily({this.id, this.name});

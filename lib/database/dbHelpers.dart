@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:hinergi_kwh/database/queries/dailyQuery.dart';
 
 import "package:hinergi_kwh/database/queries/dailyQuery.dart";
+import 'package:hinergi_kwh/model/dailyModel.dart';
 
 import 'package:sqflite/sqflite.dart' as sqlite;
 import 'package:sqflite/sqlite_api.dart';
@@ -43,16 +46,30 @@ class DbHelper {
 
   insert(String table, Map<String, Object> data) {
     openDB().then((db) {
-      db.insert(table, data,
-          conflictAlgorithm: sqlite.ConflictAlgorithm.replace);
-    }).catchError((err) {
-      print("error $err");
+      // db.insert(table, data,
+      //     conflictAlgorithm: sqlite.ConflictAlgorithm.replace);
+      // Daily daily = Daily.fromJson(data);
+      // Daily datax = Daily().toJson(data[0],data[1]);
+
+      // String jsonData = jsonEncode(data);
+      print(data);
+      try {
+        // db.rawInsert('INSERT INTO $table(id, NAME) VALUES($id, $value)');
+        db.insert(table, data,
+            conflictAlgorithm: sqlite.ConflictAlgorithm.replace);
+        // db.rawInsert('INSERT INTO $table(id, NAME) VALUES(?, ?)',
+        //     [daily.id, daily.name]);
+
+      } catch (e) {
+        print("error $e");
+      }
     });
   }
 
   Future<List> getData(String tableName) async {
     final db = await openDB();
     var result = await db.query(tableName);
+    print(result);
     return result.toList();
   }
 }
