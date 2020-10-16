@@ -57,7 +57,7 @@ class Setting {
       set.tarifPerKwh = 0;
       set.budgetMax = 0;
       set.kwhMax = 0;
-      return e;
+      return set;
     }
    
   }

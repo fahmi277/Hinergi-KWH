@@ -14,7 +14,7 @@ class mainScreen extends StatefulWidget {
 
 class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [homeScreen(), settingScreen(), buildCalender()];
+  final List<Widget> _children = [homeScreen(), buildCalender(), settingScreen()];
    
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,13 @@ class _mainScreenState extends State<mainScreen> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.settings),
-                label: 'Setting',
+                icon: Icon(Icons.calendar_today_sharp), 
+                label: 'Calendar'
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today_sharp), 
-                label: 'Calendar')
+                icon: new Icon(Icons.settings),
+                label: 'Setting',
+              )
             ],
           )),
     );
