@@ -14,16 +14,21 @@ class mainScreen extends StatefulWidget {
 
 class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [homeScreen(), buildCalender(), settingScreen()];
-   
+  final List<Widget> _children = [
+    homeScreen(),
+    BuildCalenderView(),
+    settingScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text("Hinergi"),
-          ),
+          // appBar: AppBar(
+          //   title: Text("Hinergi"),
+          // ),
+          
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: onTabTapped,
@@ -35,13 +40,11 @@ class _mainScreenState extends State<mainScreen> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today_sharp), 
-                label: 'Calendar'
-              ),
+                  icon: Icon(Icons.calendar_today_sharp), label: 'Calendar'),
               BottomNavigationBarItem(
                 icon: new Icon(Icons.settings),
                 label: 'Setting',
-              )
+              ),
             ],
           )),
     );
