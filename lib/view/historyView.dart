@@ -69,15 +69,33 @@ Widget buildCalender(BuildContext context) {
                             double.parse(dataList[panjangData - 1]['field4']) -
                                 double.parse(dataList[0]['field4']);
 
-                        return Text(
-                            "Penggunaan Tanggal " +
-                                timeValue['startTime'].toString() +
-                                "\n" +
-                                harian.toStringAsFixed(2) +
-                                "KWH",
-                            style: GoogleFonts.quantico(
+                        double abonemen = harian * 930;
+
+                        return Column(
+                          children: [
+                            Text(
+                                "Penggunaan " +
+                                    timeValue['startTime'].toString() +
+                                    "\n" +
+                                    harian.toStringAsFixed(2) +
+                                    "KWH Rp." +
+                                    abonemen.toStringAsFixed(0),
+                                style: GoogleFonts.quantico(
+                                    color: Colors.blue,
+                                    fontSize: ScreenUtil().setSp(30))),
+                            Card(
                                 color: Colors.blue,
-                                fontSize: ScreenUtil().setSp(30)));
+                                child: ListTile(
+                                  title: Center(
+                                      child: Text(
+                                          "Penggunaan Bulan ini : 30KWH",
+                                          style: GoogleFonts.quantico(
+                                              color: Colors.white,
+                                              fontSize:
+                                                  ScreenUtil().setSp(30)))),
+                                ))
+                          ],
+                        );
                       } else {
                         return Text("");
                       }
@@ -89,7 +107,7 @@ Widget buildCalender(BuildContext context) {
           ],
         ),
         Container(
-            height: ScreenUtil().setHeight(600),
+            height: ScreenUtil().setHeight(800),
             child: SfCalendar(
               onTap: (CalendarTapDetails details) async {
                 // print(details.date);

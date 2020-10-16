@@ -60,27 +60,58 @@ Widget summaryView(Map summaryData) {
       //     ],
       //   ),
       // ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                width: ScreenUtil().setWidth(widthCard + 50),
-                height: ScreenUtil().setHeight(100),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Update"),
-                    Text(dateUpdate),
-                  ],
-                ),
-              ),
-            ],
+      Padding(
+          padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+          child: Card(
+            color: Colors.blue,
+            child: ListTile(
+              title: Text("HINERGI",
+                  style: GoogleFonts.quantico(
+                      color: Colors.white, fontSize: ScreenUtil().setSp(30))),
+              trailing: Text("  Update\n$dateUpdate",
+                  style: GoogleFonts.quantico(
+                      color: Colors.white, fontSize: ScreenUtil().setSp(25))),
+            ),
+          )
+
+          // Stack(
+          //   // mainAxisAlignment: MainAxisAlignment.start,
+          //   children: [
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       children: [
+          //         Container(
+          //           width: ScreenUtil().setWidth(widthCard + 50),
+          //           height: ScreenUtil().setHeight(100),
+          //           child: Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text("HINERGI"),
+          //               // Text(dateUpdate),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.end,
+          //       children: [
+          //         Container(
+          //           width: ScreenUtil().setWidth(widthCard + 50),
+          //           height: ScreenUtil().setHeight(100),
+          //           child: Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text("Update"),
+          //               Text(dateUpdate),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ],
+          // ),
           ),
-        ],
-      ),
     ],
   );
 }

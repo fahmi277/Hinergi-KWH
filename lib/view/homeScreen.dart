@@ -56,7 +56,7 @@ class homeScreen extends StatelessWidget {
 
                     double realtimeKwh = double.parse(
                         dataMasuk[lengthDataToday.length - 1]["field3"]);
-                    realtimeKwh /= 1000;
+                    realtimeKwh; // /= 1000;
                     Map summaryData = dataMasuk[lengthDataToday.length - 1];
 
                     if (startKwhToday > lastKwhToday) {
@@ -100,15 +100,34 @@ class homeScreen extends StatelessWidget {
                         //   //   // subtitle: Text(snapshot.data['created_at']),
                         //   // ),
                         // ),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: ScreenUtil().setHeight(230)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Penggunaan Energi Saat Ini",
+                                  style: GoogleFonts.quantico(
+                                      color: Colors.blue,
+                                      fontSize: ScreenUtil().setSp(32))),
+                            ],
+                          ),
+                        ),
                         Center(
                             child: Container(
-                          width: ScreenUtil().setHeight(700),
+                          width: ScreenUtil().setWidth(800),
                           height: ScreenUtil().setHeight(700),
                           child: SfRadialGauge(
+                            // title:
+                            //     GaugeTitle(text: 'Penggunaan Energi Saat Ini'),
                             axes: <RadialAxis>[
                               RadialAxis(
+                                  axisLineStyle: AxisLineStyle(
+                                    thickness: 0.2,
+                                    thicknessUnit: GaugeSizeUnit.factor,
+                                  ),
                                   minimum: 0,
-                                  maximum: maxKwh,
+                                  maximum: 1300,
                                   startAngle: 120,
                                   endAngle: -30,
                                   annotations: <GaugeAnnotation>[
@@ -128,8 +147,8 @@ class homeScreen extends StatelessWidget {
                                                     child: Text(
                                                         realtimeKwh
                                                                 .toStringAsFixed(
-                                                                    3) +
-                                                            " KWH",
+                                                                    1) +
+                                                            " W",
                                                         style: GoogleFonts
                                                             .quantico(
                                                                 color:
@@ -166,13 +185,16 @@ class homeScreen extends StatelessWidget {
                                   ],
                                   pointers: <GaugePointer>[
                                     MarkerPointer(
-                                        value: limitKwh,
+                                        value: 1300 * 0.75,
                                         color: Colors.red,
-                                        markerType: MarkerType.text,
+                                        markerType: MarkerType.invertedTriangle,
+                                        markerWidth: 20,
+                                        markerHeight: 20,
+                                        markerOffset: -20,
                                         text: "BUDGET"),
                                     RangePointer(
-                                        value: kwhNow,
-                                        width: 20,
+                                        value: realtimeKwh,
+                                        width: 35,
                                         // double.parse(
                                         //     (energy.toStringAsFixed(0))),
                                         color: _colorGauge,

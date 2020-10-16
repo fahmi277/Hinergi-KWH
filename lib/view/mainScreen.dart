@@ -16,8 +16,8 @@ class _mainScreenState extends State<mainScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     homeScreen(),
+    BuildCalenderView(),
     settingScreen(),
-    BuildCalenderView()
   ];
 
   @override
@@ -25,9 +25,10 @@ class _mainScreenState extends State<mainScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text("Hinergi"),
-          ),
+          // appBar: AppBar(
+          //   title: Text("Hinergi"),
+          // ),
+          
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: onTabTapped,
@@ -39,11 +40,11 @@ class _mainScreenState extends State<mainScreen> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
+                  icon: Icon(Icons.calendar_today_sharp), label: 'Calendar'),
+              BottomNavigationBarItem(
                 icon: new Icon(Icons.settings),
                 label: 'Setting',
               ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today_sharp), label: 'Calendar')
             ],
           )),
     );
