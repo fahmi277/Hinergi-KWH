@@ -28,7 +28,7 @@ class _mainScreenState extends State<mainScreen> {
           // appBar: AppBar(
           //   title: Text("Hinergi"),
           // ),
-          
+
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: onTabTapped,
