@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:hinergi_kwh/controller/getTimeData.dart';
+import 'package:hinergi_kwh/model/thinkspeak.dart';
 import 'package:hinergi_kwh/service/apiKey.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -84,7 +85,15 @@ Future<Map> getThinkspeakData(Map timeValue) async {
         "&timezone=Asia%2FJakarta";
 
     Response response = await dio.get(url);
-    // print(response.data);
+    // print(response.runtimeType);
+    var dataThinkspeak = Thinkspeak.fromJson(response.data);
+
+    // var data1 = dataThinkspeak.feeds.toString();
+
+    // var dataFeeds = Feeds.fromJson(dataThinkspeak.feeds)
+
+    print(dataThinkspeak.feeds[1].createdAt);
+    // print(url);
     // Map valueMap = json.decode(response.data);
 
     // List valueList = valueMap["feeds"];
