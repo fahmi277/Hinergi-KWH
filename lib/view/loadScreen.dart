@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen1> {
               // Map data = {"id":"20202020"};
               // var data = Daily().toJson(data);
 
-              _helper.insert(DailyQuery.TABLE_NAME, {"NAME": "1.56"});
+              _helper.insert(DailyQuery.TABLE_NAME, {"NAME": "1.56","id":101});
               // _helper.getData(DailyQuery.TABLE_NAME).then((value) {
               //   //value.forEach((element) {
               //   // Daily daily = Daily.fromJson(element);
