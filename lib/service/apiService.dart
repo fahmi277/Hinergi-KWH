@@ -87,11 +87,6 @@ Future<Map> getThinkspeakData(Map timeValue) async {
     Response response = await dio.get(url);
     // print(response.runtimeType);
     var dataThinkspeak = Thinkspeak.fromJson(response.data);
-
-    // var data1 = dataThinkspeak.feeds.toString();
-
-    // var dataFeeds = Feeds.fromJson(dataThinkspeak.feeds)
-
     print(dataThinkspeak.feeds[1].createdAt);
     // print(url);
     // Map valueMap = json.decode(response.data);
