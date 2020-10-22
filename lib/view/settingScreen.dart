@@ -3,6 +3,8 @@ import 'package:hinergi_kwh/model/setting.dart';
 import 'package:hinergi_kwh/view/MyTextFormField.dart';
 import 'package:hinergi_kwh/view/buttonDate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:validators/validators.dart' as validator;
 
 class settingScreen extends StatelessWidget {
@@ -25,10 +27,62 @@ class settingScreen extends StatelessWidget {
               builder: (context, AsyncSnapshot<Setting> snapshot) {
                   if (snapshot.hasData) {
                     return SingleChildScrollView(
-                            child : Form(
+                            child :  Form(
                               key: _formKey,
                               child: Column(
                                 children: <Widget>[
+                                  Padding(
+                                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+                                  child: Card(
+                                    color: Colors.blue,
+                                    child: ListTile(
+                                      title: Text("PENGATURAN",
+                                          style: GoogleFonts.quantico(
+                                              color: Colors.white, fontSize: ScreenUtil().setSp(30))),
+                                      // trailing: Text("  Setting",
+                                      //     style: GoogleFonts.quantico(
+                                      //         color: Colors.white, fontSize: ScreenUtil().setSp(25))),
+                                    ),
+                                  )
+
+                                  // Stack(
+                                  //   // mainAxisAlignment: MainAxisAlignment.start,
+                                  //   children: [
+                                  //     Row(
+                                  //       mainAxisAlignment: MainAxisAlignment.start,
+                                  //       children: [
+                                  //         Container(
+                                  //           width: ScreenUtil().setWidth(widthCard + 50),
+                                  //           height: ScreenUtil().setHeight(100),
+                                  //           child: Column(
+                                  //             mainAxisAlignment: MainAxisAlignment.center,
+                                  //             children: [
+                                  //               Text("HINERGI"),
+                                  //               // Text(dateUpdate),
+                                  //             ],
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     Row(
+                                  //       mainAxisAlignment: MainAxisAlignment.end,
+                                  //       children: [
+                                  //         Container(
+                                  //           width: ScreenUtil().setWidth(widthCard + 50),
+                                  //           height: ScreenUtil().setHeight(100),
+                                  //           child: Column(
+                                  //             mainAxisAlignment: MainAxisAlignment.center,
+                                  //             children: [
+                                  //               Text("Update"),
+                                  //               Text(dateUpdate),
+                                  //             ],
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                  ),
                                   MyTextFormField(
                                     hintText: 'Masukkan Channel Id anda',
                                     labelText: 'Channel Id',
@@ -131,7 +185,7 @@ class settingScreen extends StatelessWidget {
                                                     }
                                                   },
                                                   child: Text(
-                                                    'Save',
+                                                    'SIMPAN',
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                     ),
