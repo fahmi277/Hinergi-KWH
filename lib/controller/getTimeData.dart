@@ -7,9 +7,10 @@ class GetTimedata {
     Map timeData = {
       "startTime": new DateFormat("yyyy-MM-dd").format(time),
       "endTime": new DateFormat("yyyy-MM-dd")
-          .format(new DateTime.now().add(new Duration(days: 1)))
+          .format(time.add(new Duration(days: 1)))
     };
 
+    print(timeData);
     return timeData;
   }
 

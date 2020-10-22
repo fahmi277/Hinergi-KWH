@@ -13,6 +13,7 @@ class mainScreen extends StatefulWidget {
 }
 
 class _mainScreenState extends State<mainScreen> {
+  
   int _currentIndex = 0;
   final List<Widget> _children = [
     homeScreen(),
@@ -28,7 +29,7 @@ class _mainScreenState extends State<mainScreen> {
           // appBar: AppBar(
           //   title: Text("Hinergi"),
           // ),
-          
+
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: onTabTapped,
