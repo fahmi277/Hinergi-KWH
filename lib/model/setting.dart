@@ -26,6 +26,16 @@ class Setting {
     prefs.setString("startTime", "2020-10-10");
   }
 
+  setApiChannel(Setting set) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('channelId', set.channelId);
+    prefs.setString('apiKey', set.apiKey);
+     prefs.setDouble('tarif', 0);
+    prefs.setDouble('budget', 0);
+    prefs.setDouble('kwhmax', 0);
+    prefs.setString("startTime", "2020-10-10");
+  }
+
   setChannelId(String data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('channelId', data);
@@ -51,16 +61,17 @@ class Setting {
       Setting set = Setting();
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      set.channelId = prefs.getString('channelId') ?? 0;
-      set.apiKey = prefs.getString('apiKey') ?? 0;
+      set.channelId = prefs.getString('channelId') ?? '';
+      set.apiKey = prefs.getString('apiKey') ?? '';
       set.tarifPerKwh = prefs.getDouble('tarif') ?? 0;
       set.budgetMax = prefs.getDouble('budget') ?? 0;
       set.kwhMax = prefs.getDouble('kwhmax') ?? 0;
       return set;
     } catch (e) {
+      print("error : "+e.toString());
       Setting set = Setting();
-      set.apiKey = 'non set';
-      set.channelId = 'non set';
+      set.apiKey = '';
+      set.channelId = '';
       set.tarifPerKwh = 0;
       set.budgetMax = 0;
       set.kwhMax = 0;

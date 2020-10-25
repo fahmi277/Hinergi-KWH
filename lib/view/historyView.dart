@@ -48,6 +48,9 @@ class _BuildCalenderViewState extends State<BuildCalenderView> {
 
 Widget buildCalender(BuildContext context) {
   return Scaffold(
+    appBar: AppBar(
+                    title: Text('KALENDER'),
+                  ),
     body: Stack(
       children: [
         Column(

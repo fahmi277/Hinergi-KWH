@@ -16,7 +16,7 @@ MyTextFormField({
     this.hintText,
     this.labelText,
     this.helpText,
-    this.value = '',
+    this.value = '0',
     this.validator,
     this.onSaved,
     this.isPassword = false,

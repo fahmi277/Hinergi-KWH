@@ -22,6 +22,7 @@ class settingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return FutureBuilder<Setting>(
               future: seter.getSetting(),
               builder: (context, AsyncSnapshot<Setting> snapshot) {
@@ -31,62 +32,27 @@ class settingScreen extends StatelessWidget {
                               key: _formKey,
                               child: Column(
                                 children: <Widget>[
-                                  Padding(
-                                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
-                                  child: Card(
-                                    color: Colors.blue,
-                                    child: ListTile(
-                                      title: Text("PENGATURAN",
-                                          style: GoogleFonts.quantico(
-                                              color: Colors.white, fontSize: ScreenUtil().setSp(30))),
-                                      // trailing: Text("  Setting",
-                                      //     style: GoogleFonts.quantico(
-                                      //         color: Colors.white, fontSize: ScreenUtil().setSp(25))),
-                                    ),
-                                  )
-
-                                  // Stack(
-                                  //   // mainAxisAlignment: MainAxisAlignment.start,
-                                  //   children: [
-                                  //     Row(
-                                  //       mainAxisAlignment: MainAxisAlignment.start,
-                                  //       children: [
-                                  //         Container(
-                                  //           width: ScreenUtil().setWidth(widthCard + 50),
-                                  //           height: ScreenUtil().setHeight(100),
-                                  //           child: Column(
-                                  //             mainAxisAlignment: MainAxisAlignment.center,
-                                  //             children: [
-                                  //               Text("HINERGI"),
-                                  //               // Text(dateUpdate),
-                                  //             ],
-                                  //           ),
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //     Row(
-                                  //       mainAxisAlignment: MainAxisAlignment.end,
-                                  //       children: [
-                                  //         Container(
-                                  //           width: ScreenUtil().setWidth(widthCard + 50),
-                                  //           height: ScreenUtil().setHeight(100),
-                                  //           child: Column(
-                                  //             mainAxisAlignment: MainAxisAlignment.center,
-                                  //             children: [
-                                  //               Text("Update"),
-                                  //               Text(dateUpdate),
-                                  //             ],
-                                  //           ),
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //   ],
-                                  // ),
+                                  AppBar(
+                                    title: Text('PENGATURAN'),
                                   ),
+                                  // Padding(
+                                  //   padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+                                  //   child: Card(
+                                  //     color: Colors.blue,
+                                  //     child: ListTile(
+                                  //       title: Text("PENGATURAN",
+                                  //           style: GoogleFonts.quantico(
+                                  //               color: Colors.white, fontSize: ScreenUtil().setSp(30))),
+                                  //       // trailing: Text("  Setting",
+                                  //       //     style: GoogleFonts.quantico(
+                                  //       //         color: Colors.white, fontSize: ScreenUtil().setSp(25))),
+                                  //     ),
+                                  //   )
+                                  // ),
                                   MyTextFormField(
                                     hintText: 'Masukkan Channel Id anda',
                                     labelText: 'Channel Id',
-                                    value: snapshot.data.channelId,
+                                    value: snapshot.data.channelId ?? 0,
                                     isEmail: false,
                                     icon: Icon(Icons.verified_user),
                                     validator: (String value) {
@@ -102,7 +68,7 @@ class settingScreen extends StatelessWidget {
                                   MyTextFormField(
                                     hintText: 'Masukkan API Key anda',
                                     labelText: 'API Key',
-                                    value: snapshot.data.apiKey,
+                                    value: snapshot.data.apiKey  ?? 0,
                                     isEmail: false,
                                     icon: Icon(Icons.vpn_key_sharp),
                                     validator: (String value) {
@@ -118,7 +84,7 @@ class settingScreen extends StatelessWidget {
                                   MyTextFormField(
                                     hintText: 'Masukkan tarif listrik',
                                     labelText: 'Tarif per KWh',
-                                    value: snapshot.data.tarifPerKwh.toString(),
+                                    value: snapshot.data.tarifPerKwh.toString() ?? '0',
                                     isEmail: false,
                                     icon: Icon(Icons.money),
                                     validator: (String value) {
@@ -134,7 +100,7 @@ class settingScreen extends StatelessWidget {
                                   MyTextFormField(
                                     hintText: 'Masukkan budget anda',
                                     labelText: 'Budget',
-                                    value: snapshot.data.budgetMax.toString(),
+                                    value: snapshot.data.budgetMax.toString() ?? '0',
                                     isEmail: false,
                                     icon: Icon(Icons.money_off_rounded),
                                     validator: (String value) {
@@ -150,7 +116,7 @@ class settingScreen extends StatelessWidget {
                                   MyTextFormField(
                                     hintText: 'Masukkan batas watt meter',
                                     labelText: 'Batas daya',
-                                    value: snapshot.data.kwhMax.toString(),
+                                    value: snapshot.data.kwhMax.toString() ?? '0',
                                     isEmail: false,
                                     icon: Icon(Icons.lightbulb_outline_sharp),
                                     validator: (String value) {
@@ -176,12 +142,7 @@ class settingScreen extends StatelessWidget {
                                                       _formKey.currentState.save();
                                                     
                                                       setting.setSetting(setting);
-                                                      // Navigator.push(
-                                                          // context,
-                                                          // MaterialPageRoute(
-                                                          //     builder: (context) => Result(model: this.setting))
-                                                              
-                                                              // );
+                                            
                                                     }
                                                   },
                                                   child: Text(
@@ -198,12 +159,27 @@ class settingScreen extends StatelessWidget {
                               )
                           )
                     );
+                 
                   }else{
                     return SingleChildScrollView(
                             child : Form(
                               key: _formKey,
                               child: Column(
                                 children: <Widget>[
+                                  // Padding(
+                                  //   padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+                                  //   child: Card(
+                                  //     color: Colors.blue,
+                                  //     child: ListTile(
+                                  //       title: Text("PENGATURAN",
+                                  //           style: GoogleFonts.quantico(
+                                  //               color: Colors.white, fontSize: ScreenUtil().setSp(30))),
+                                  //       // trailing: Text("  Setting",
+                                  //       //     style: GoogleFonts.quantico(
+                                  //       //         color: Colors.white, fontSize: ScreenUtil().setSp(25))),
+                                  //     ),
+                                  //   )
+                                  // ),
                                   MyTextFormField(
                                     hintText: 'Masukkan Channel Id anda',
                                     labelText: 'Channel Id',
@@ -314,6 +290,7 @@ class settingScreen extends StatelessWidget {
                               )
                           )
                     );
+                  
                   }
               },
     );
